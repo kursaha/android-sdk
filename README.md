@@ -1,7 +1,6 @@
-```markdown
 # Kursaha Android SDK
 
-![Kursaha Logo](link-to-your-logo.png)
+![Kursaha Logo](https://kursaha.com/content/images/icons/logo/logo-small128x128.png)
 
 The Kursaha Android SDK allows you to seamlessly capture user interaction events within your Android applications. With this SDK, you can gain valuable insights into user behavior, personalize user experiences, and enhance your customer engagement strategies.
 
