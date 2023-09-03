@@ -104,9 +104,3 @@ at [support@kursaha.com](mailto:support@kursaha.com).
 ## License
 
 This SDK is released under the [MIT License](LICENSE).
-
-```
-
-Remember to replace placeholders like `YOUR_API_KEY`, `link-to-your-logo.png`, and other configuration details with your specific information.
-
-Feel free to add more sections or details to suit your SDK's unique features and requirements. A well-documented SDK with a clear README helps developers integrate your software with ease.
