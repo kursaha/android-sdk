@@ -1,15 +1,11 @@
 # Kursaha Android SDK
 
-<table cellpadding="0" cellspacing="0" border="0">
-                              <tbody><tr>
-                                 <td style="padding: 20px 0;">
-                                    <img src="https://kursaha.com/content/images/icons/logo/logo-small128x128.png" alt="Logo" width="64" height="auto" style="display: block; width: 100%; max-width: 64px; margin: 0 auto;">
-                                 </td>
-                                 <td style="font-size: 24px; font-weight: 600; color: #0070E7; align-self: center;">ursaha</td>
-                              </tr>
-                           </tbody></table>
-
-![Kursaha Logo](https://kursaha.com/content/images/icons/logo/logo-small128x128.png)
+<p align="center">
+  <a href="https://kursaha.com" target="_blank" align="center">
+    <img src="https://kursaha.com/content/images/icons/logo/logo-small128x128.png" width="280">
+  </a>
+  <br />
+</p>
 
 The Kursaha Android SDK allows you to seamlessly capture user interaction events within your Android
 applications. With this SDK, you can gain valuable insights into user behavior, personalize user
