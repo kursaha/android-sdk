@@ -1,11 +1,11 @@
-# Kursaha Android SDK
-
 <p align="center">
   <a href="https://kursaha.com" target="_blank" align="center">
-    <img src="https://kursaha.com/content/images/icons/logo/logo-small128x128.png" width="280">
+    <img src="https://kursaha.com/content/images/icons/logo/logo-small128x128.png" width="64">
   </a>
   <br />
 </p>
+
+# Kursaha Android SDK
 
 The Kursaha Android SDK allows you to seamlessly capture user interaction events within your Android
 applications. With this SDK, you can gain valuable insights into user behavior, personalize user
