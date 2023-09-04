@@ -42,6 +42,8 @@ public class MainActivity extends KursahaActivity {
                 Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
                         .setAnchorView(R.id.fab)
                         .setAction("Action", null).show();
+
+                Kursaha.trackEvent("view");
             }
         });
     }

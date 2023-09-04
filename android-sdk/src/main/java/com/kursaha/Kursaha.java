@@ -5,6 +5,10 @@ import android.app.Application;
 import android.provider.Settings;
 import android.util.Log;
 
+import com.kursaha.common.Callback;
+import com.kursaha.engagedatadrive.dto.CustomerData;
+
+import java.io.IOException;
 import java.util.UUID;
 
 public class Kursaha {
@@ -69,7 +73,23 @@ public class Kursaha {
         // send event to server
     }
 
-    public static void updateCustomer() {
+    public static void updateCustomer(String customerId, String emailId) {
+        if (kursaha == null) {
+            Log.e(TAG, "Kursaha is not initialised");
+            throw new RuntimeException("Please call Kursaha.initialize first");
+        }
+        CustomerData customerData = new CustomerData();
+        customerData.setEmail(emailId);
+        kursaha.kursahaClient.edd.sendCustomerData(customerId, customerData, new Callback() {
+            @Override
+            public void onSuccess() {
+                Log.i(TAG, "successfully updated");
+            }
 
+            @Override
+            public void onFailure() {
+                Log.e(TAG, "failed to update");
+            }
+        });
     }
 }

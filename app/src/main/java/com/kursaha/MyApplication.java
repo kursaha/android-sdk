@@ -10,11 +10,6 @@ public class MyApplication extends Application {
         super.onCreate();
         // Initialize the Kursaha SDK
         Kursaha.initialize(this, "YOUR_API_KEY");
-        InteractionLogger.setListener(new InteractionLogger.InteractionListener() {
-            @Override
-            public void onInteraction(String interactionType, String interactionDetails) {
-
-            }
-        });
+        Kursaha.updateCustomer("1234", "sample@kursaha.com");
     }
 }
