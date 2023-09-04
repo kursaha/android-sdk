@@ -1,22 +1,43 @@
 plugins {
     id 'com.android.library'
+    id 'maven-publish'
+    id 'signing'
+    id 'com.kezong.fat-aar'
+
 }
+apply from: "${rootDir}/gradle/publish-root.gradle"
+
+group = "com.kursaha"
+version '0.3'
 
 android {
     namespace 'com.kursaha.sdk'
     compileSdk 33
+    buildFeatures {
+        buildConfig = true
+    }
 
     defaultConfig {
         minSdk 16
+        aarMetadata {
+            minCompileSdk = 29
+        }
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         consumerProguardFiles "consumer-rules.pro"
     }
-
     buildTypes {
         release {
+            debuggable true
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+    publishing {
+        singleVariant('release') {
+            // if you don't want sources/javadoc, remove these lines
+            withSourcesJar()
+            withJavadocJar()
         }
     }
     compileOptions {
@@ -24,6 +45,82 @@ android {
         targetCompatibility JavaVersion.VERSION_1_8
     }
 }
+
+task javadocJar(type: Jar) {
+    archiveClassifier.set('javadoc')
+}
+
+publishing {
+        publications {
+            release(MavenPublication) {
+                artifactId = 'android-sdk'
+                groupId = 'com.kursaha'
+                version = version
+                afterEvaluate {
+                    println("Components: " + components*.name)
+                    if (project.plugins.findPlugin("com.android.library")) {
+                        from components.release
+                    } else {
+                        from components.java
+                    }
+                }
+                versionMapping {
+                    usage('java-api') {
+                        fromResolutionOf('runtimeClasspath')
+                    }
+                    usage('java-runtime') {
+                        fromResolutionResult()
+                    }
+                }
+
+                pom {
+                    name = 'Kursaha Android SDK'
+                    packaging = 'jar'
+                    // optionally artifactId can be defined here
+                    description = 'SDK used to connect to Kursaha services.'
+                    url = 'https://docs.kursaha.com/java-sdk'
+
+                    scm {
+                        connection = 'scm:svn:https://github.com/kursaha/android-sdk/tree/main'
+                        developerConnection = 'scm:svn:https://github.com/kursaha/android-sdk/tree/dev'
+                        url = 'https://github.com/kursaha/android-sdk/tree/main'
+                    }
+
+                    licenses {
+                        license {
+                            name = 'MIT License'
+                            url = 'https://github.com/kursaha/android-sdk/blob/main/LICENSE'
+                        }
+                    }
+
+                    developers {
+                        developer {
+                            id = 'KursahaTech'
+                            name = 'Kursaha Tech'
+                            email = 'hello@kursaha.com'
+                        }
+                    }
+                }
+            }
+        }
+        repositories {
+            maven {
+                credentials {
+                    username ossrhUsername
+                    password ossrhPassword
+                }
+                def releasesRepoUrl = "https://s01.oss.sonatype.org/content/repositories/releases/"
+                def snapshotsRepoUrl = "https://s01.oss.sonatype.org/content/repositories/snapshots/"
+                url = version.endsWith('SNAPSHOT') ? snapshotsRepoUrl : releasesRepoUrl
+
+            }
+        }
+    }
+
+signing {
+    sign publishing.publications.release
+}
+
 
 dependencies {
 
