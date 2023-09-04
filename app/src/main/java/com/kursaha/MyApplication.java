@@ -8,11 +8,8 @@ public class MyApplication extends Application {
     @Override
     public void onCreate() {
         super.onCreate();
-        InteractionLogger.setListener(new InteractionLogger.InteractionListener() {
-            @Override
-            public void onInteraction(String interactionType, String interactionDetails) {
-
-            }
-        });
+        // Initialize the Kursaha SDK
+        Kursaha.initialize(this, "YOUR_API_KEY");
+        Kursaha.updateCustomer("1234", "sample@kursaha.com");
     }
 }
