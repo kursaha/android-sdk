@@ -7,6 +7,9 @@
 
 # Kursaha Android SDK
 
+![Maven Central](https://maven-badges.herokuapp.com/maven-central/com.kursaha/android-sdk/badge.svg?style=plastic)
+![Android Build](https://github.com/kursaha/android-sdk/actions/workflows/android.yml/badge.svg)
+
 The Kursaha Android SDK allows you to seamlessly capture user interaction events within your Android
 applications. With this SDK, you can gain valuable insights into user behavior, personalize user
 experiences, and enhance your customer engagement strategies.
@@ -29,7 +32,7 @@ You can easily integrate the Kursaha Android SDK into your Android project using
 
 ```groovy
 dependencies {
-    implementation 'com.kursaha:kursaha-android-sdk:1.0.0'
+    implementation 'com.kursaha:kursaha-android-sdk:0.0.4'
 }
 ```
 
