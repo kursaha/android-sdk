@@ -32,7 +32,7 @@ You can easily integrate the Kursaha Android SDK into your Android project using
 
 ```groovy
 dependencies {
-    implementation 'com.kursaha:kursaha-android-sdk:0.0.4'
+    implementation 'com.kursaha:android-sdk:0.0.4'
 }
 ```
 
