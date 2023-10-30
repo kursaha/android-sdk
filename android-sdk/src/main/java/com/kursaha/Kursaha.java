@@ -7,8 +7,6 @@ import android.util.Log;
 
 import com.kursaha.common.Callback;
 import com.kursaha.engagedatadrive.dto.CustomerData;
-
-import java.io.IOException;
 import java.util.UUID;
 
 public class Kursaha {
@@ -73,7 +71,7 @@ public class Kursaha {
         // send event to server
     }
 
-    public static void updateCustomer(String customerId, String emailId) {
+    public static void sendCustomerDetails(String customerId, String emailId) {
         if (kursaha == null) {
             Log.e(TAG, "Kursaha is not initialised");
             throw new RuntimeException("Please call Kursaha.initialize first");
