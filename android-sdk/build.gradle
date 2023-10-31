@@ -8,7 +8,7 @@ plugins {
 apply from: "${rootDir}/gradle/publish-root.gradle"
 
 group = "com.kursaha"
-version '0.4'
+version '0.5'
 
 android {
     namespace 'com.kursaha.sdk'
@@ -57,7 +57,6 @@ publishing {
                 groupId = 'com.kursaha'
                 version = version
                 afterEvaluate {
-                    println("Components: " + components*.name)
                     if (project.plugins.findPlugin("com.android.library")) {
                         from components.release
                     } else {
@@ -78,7 +77,7 @@ publishing {
                     packaging = 'jar'
                     // optionally artifactId can be defined here
                     description = 'SDK used to connect to Kursaha services.'
-                    url = 'https://docs.kursaha.com/java-sdk'
+                    url = 'https://docs.kursaha.com/android-sdk'
 
                     scm {
                         connection = 'scm:svn:https://github.com/kursaha/android-sdk/tree/main'
