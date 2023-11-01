@@ -7,6 +7,10 @@ import android.util.Log;
 
 import com.kursaha.common.Callback;
 import com.kursaha.engagedatadrive.dto.CustomerData;
+import com.kursaha.smartassist.dto.ChatAutomationRequestDto;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.UUID;
 
 public class Kursaha {
@@ -89,5 +93,25 @@ public class Kursaha {
                 Log.e(TAG, "failed to update");
             }
         });
+    }
+
+    public static String chatResponse(
+            UUID chatIdentifier,
+            String message,
+            List<ChatMessage> previousChatMessages
+    ) throws IOException {
+        if (kursaha == null) {
+            Log.e(TAG, "Kursaha is not initialised");
+            throw new RuntimeException("Please call Kursaha.initialize first");
+        }
+        List<ChatAutomationRequestDto.QAndA> qAndAList = new ArrayList<>();
+        for(ChatMessage chatMessage : previousChatMessages) {
+            ChatAutomationRequestDto.QAndA qAndA = new ChatAutomationRequestDto.QAndA();
+            qAndA.setRequest(chatMessage.getSender());
+            qAndA.setResponse(chatMessage.getMessage());
+            qAndAList.add(qAndA);
+        }
+
+        return kursaha.kursahaClient.sa.getResponse(chatIdentifier, message, qAndAList);
     }
 }
