@@ -1,5 +1,6 @@
 package com.kursaha;
 
+import android.content.Intent;
 import android.os.Bundle;
 
 import com.google.android.material.snackbar.Snackbar;
@@ -39,11 +40,10 @@ public class MainActivity extends KursahaActivity {
         binding.fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAnchorView(R.id.fab)
-                        .setAction("Action", null).show();
+                Intent intent = new Intent(MainActivity.this, ChatActivity.class);
+                startActivity(intent);
 
-                Kursaha.trackEvent("view");
+                Kursaha.trackEvent("customer_support_chat_start");
             }
         });
     }
