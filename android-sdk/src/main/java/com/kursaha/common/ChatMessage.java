@@ -1,8 +1,8 @@
-package com.kursaha;
+package com.kursaha.common;
 
 public class ChatMessage {
-    private String message;
-    private String sender;
+    private final String message;
+    private final String sender;
 
     public ChatMessage(String message, String sender) {
         this.message = message;

@@ -6,6 +6,7 @@ import android.provider.Settings;
 import android.util.Log;
 
 import com.kursaha.common.Callback;
+import com.kursaha.common.ChatMessage;
 import com.kursaha.engagedatadrive.dto.CustomerData;
 import com.kursaha.smartassist.dto.ChatAutomationRequestDto;
 import java.io.IOException;
@@ -114,4 +115,26 @@ public class Kursaha {
 
         return kursaha.kursahaClient.sa.getResponse(chatIdentifier, message, qAndAList);
     }
+
+    public static void chatResponseAsync(
+            UUID chatIdentifier,
+            String message,
+            List<ChatMessage> previousChatMessages,
+            Callback<String> callback
+    ) {
+        if (kursaha == null) {
+            Log.e(TAG, "Kursaha is not initialised");
+            throw new RuntimeException("Please call Kursaha.initialize first");
+        }
+        List<ChatAutomationRequestDto.QAndA> qAndAList = new ArrayList<>();
+        for(ChatMessage chatMessage : previousChatMessages) {
+            ChatAutomationRequestDto.QAndA qAndA = new ChatAutomationRequestDto.QAndA();
+            qAndA.setRequest(chatMessage.getSender());
+            qAndA.setResponse(chatMessage.getMessage());
+            qAndAList.add(qAndA);
+        }
+
+        kursaha.kursahaClient.sa.getResponse(chatIdentifier, message, qAndAList, callback);
+    }
+
 }

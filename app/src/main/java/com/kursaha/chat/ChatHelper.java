@@ -2,7 +2,7 @@ package com.kursaha.chat;
 
 import android.util.Log;
 
-import com.kursaha.ChatMessage;
+import com.kursaha.common.ChatMessage;
 import com.kursaha.Kursaha;
 import java.io.IOException;
 import java.util.List;
