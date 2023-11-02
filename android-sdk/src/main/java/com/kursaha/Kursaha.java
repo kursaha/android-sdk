@@ -96,26 +96,6 @@ public class Kursaha {
         });
     }
 
-    public static String chatResponse(
-            UUID chatIdentifier,
-            String message,
-            List<ChatMessage> previousChatMessages
-    ) throws IOException {
-        if (kursaha == null) {
-            Log.e(TAG, "Kursaha is not initialised");
-            throw new RuntimeException("Please call Kursaha.initialize first");
-        }
-        List<ChatAutomationRequestDto.QAndA> qAndAList = new ArrayList<>();
-        for(ChatMessage chatMessage : previousChatMessages) {
-            ChatAutomationRequestDto.QAndA qAndA = new ChatAutomationRequestDto.QAndA();
-            qAndA.setRequest(chatMessage.getSender());
-            qAndA.setResponse(chatMessage.getMessage());
-            qAndAList.add(qAndA);
-        }
-
-        return kursaha.kursahaClient.sa.getResponse(chatIdentifier, message, qAndAList);
-    }
-
     public static void chatResponseAsync(
             UUID chatIdentifier,
             String message,
