@@ -1,9 +1,7 @@
 package com.kursaha;
 
-import android.annotation.SuppressLint;
 import android.os.Bundle;
 import android.util.Log;
-import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
@@ -38,33 +36,29 @@ public class ChatActivity extends KursahaActivity {
         messageEditText = findViewById(R.id.messageEditText);
         Button sendButton = findViewById(R.id.sendButton);
 
-        sendButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            @SuppressLint("NewApi")
-            public void onClick(View v) {
-                String messageText = messageEditText.getText().toString().trim();
-                if (!messageText.isEmpty()) {
-                    // Create a ChatMessage object and add it to the chatMessages list
-                    com.kursaha.common.ChatMessage message = new ChatMessage(messageText, "sender", true, LocalDateTime.now()); // You can specify the sender
-                    chatMessages.add(message);
-                    chatAdapter.notifyDataSetChanged();
-                    messageEditText.setText(""); // Clear the input field
+        sendButton.setOnClickListener(v -> {
+            String messageText = messageEditText.getText().toString().trim();
+            if (!messageText.isEmpty()) {
+                // Create a ChatMessage object and add it to the chatMessages list
+                ChatMessage message = new ChatMessage(messageText, "sender", true, LocalDateTime.now()); // You can specify the sender
+                chatMessages.add(message);
+                chatAdapter.notifyDataSetChanged();
+                messageEditText.setText(""); // Clear the input field
 
-                    Kursaha.chatResponseAsync(CHAT_IDENTIFIER, messageText, chatMessages, new Callback<String>() {
-                        @Override
-                        public void onFailure() {
-                            Log.e(TAG, "Failed to get chat response");
-                        }
+                Kursaha.chatResponseAsync(CHAT_IDENTIFIER, messageText, chatMessages, new Callback<String>() {
+                    @Override
+                    public void onFailure() {
+                        Log.e(TAG, "Failed to get chat response");
+                    }
 
-                        @Override
-                        public void onSuccess(String result) {
-                            chatMessages.add(new ChatMessage(result, "Customer Success Representative", false, LocalDateTime.now()));
-                            chatAdapter.notifyDataSetChanged();
+                    @Override
+                    public void onSuccess(String result) {
+                        chatMessages.add(new ChatMessage(result, "Customer Success Representative", false, LocalDateTime.now()));
+                        chatAdapter.notifyDataSetChanged();
 
-                            Log.d(TAG, "Result of the message: " + result);
-                        }
-                    });
-                }
+                        Log.d(TAG, "Result of the message: " + result);
+                    }
+                });
             }
         });
     }
