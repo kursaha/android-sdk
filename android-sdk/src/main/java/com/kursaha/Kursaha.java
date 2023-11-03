@@ -9,7 +9,7 @@ import com.kursaha.common.Callback;
 import com.kursaha.common.ChatMessage;
 import com.kursaha.engagedatadrive.dto.CustomerData;
 import com.kursaha.smartassist.dto.ChatAutomationRequestDto;
-import java.io.IOException;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
@@ -17,7 +17,6 @@ import java.util.UUID;
 public class Kursaha {
     private static final String TAG = "Kursaha";
 
-    private final String apiKey;
     private final UUID sessionId;
     private final String deviceId;
 
@@ -25,7 +24,6 @@ public class Kursaha {
 
 
     public Kursaha(String apiKey, UUID sessionId, String deviceId) {
-        this.apiKey = apiKey;
         this.sessionId = sessionId;
         this.deviceId = deviceId;
         this.kursahaClient = new KursahaClient(apiKey);
@@ -83,6 +81,7 @@ public class Kursaha {
         }
         CustomerData customerData = new CustomerData();
         customerData.setEmail(emailId);
+
         kursaha.kursahaClient.edd.sendCustomerData(customerId, customerData, new Callback() {
             @Override
             public void onSuccess() {

@@ -14,7 +14,6 @@ import java.util.Calendar;
 import java.util.List;
 import java.util.UUID;
 
-
 public class ChatActivity extends KursahaActivity {
     private static final String TAG = "ChatActivity";
     private static final UUID CHAT_IDENTIFIER = UUID.fromString("<Chat-Identifier>");
@@ -52,12 +51,10 @@ public class ChatActivity extends KursahaActivity {
                         public void onFailure() {
                             Log.e(TAG, "Failed to get chat response");
                         }
-
                         @Override
                         public void onSuccess(String result) {
                             chatMessages.add(new ChatMessage(result, "Customer Success Representative", false, Calendar.getInstance().getTime()));
                             chatAdapter.notifyDataSetChanged();
-
                             Log.d(TAG, "Result of the message: " + result);
                         }
                     });
@@ -65,6 +62,4 @@ public class ChatActivity extends KursahaActivity {
             }
         });
     }
-
-
 }
