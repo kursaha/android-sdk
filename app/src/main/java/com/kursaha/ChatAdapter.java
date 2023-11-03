@@ -7,12 +7,10 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.TextView;
-
 import com.kursaha.common.ChatMessage;
-
 import java.time.LocalDate;
-import java.time.LocalDateTime;
-import java.time.LocalTime;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 
 public class ChatAdapter extends ArrayAdapter<com.kursaha.common.ChatMessage> {
@@ -42,7 +40,7 @@ public class ChatAdapter extends ArrayAdapter<com.kursaha.common.ChatMessage> {
         TextView timeView1 = convertView.findViewById(R.id.timeView1);
         TextView timeView2 = convertView.findViewById(R.id.timeView2);
 
-        String time = message.getDateTime().getHour() + ":" + message.getDateTime().getMinute();
+        String time = message.getDateTime().getHours() + ":" + message.getDateTime().getMinutes();
 
         if(message.getIsSender()) {
             textView1.setText(message.getMessage());
@@ -56,7 +54,8 @@ public class ChatAdapter extends ArrayAdapter<com.kursaha.common.ChatMessage> {
             timeView1.setVisibility(View.GONE);
         }
 
-        if(message.getDateTime().isAfter(LocalDateTime.of(LocalDate.now(), LocalTime.of(23, 59, 59)))) {
+        Date date = Calendar.getInstance().getTime();
+        if(message.getDateTime().after(new Date(date.getYear(), date.getMonth(), date.getDay(), 23, 59, 59))) {
             dateView.setText(LocalDate.now().getDayOfMonth() + "-" + LocalDate.now().getMonthValue() + "-" + LocalDate.now().getYear());
         } else {
             convertView.findViewById(R.id.dateView).setVisibility(View.GONE);

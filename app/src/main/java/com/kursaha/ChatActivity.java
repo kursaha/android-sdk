@@ -1,19 +1,16 @@
 package com.kursaha;
 
-import android.annotation.SuppressLint;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
-
 import com.kursaha.common.Callback;
 import com.kursaha.common.ChatMessage;
 import com.kursaha.sdk.KursahaActivity;
-
-import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
 import java.util.UUID;
 
@@ -40,12 +37,12 @@ public class ChatActivity extends KursahaActivity {
 
         sendButton.setOnClickListener(new View.OnClickListener() {
             @Override
-            @SuppressLint("NewApi")
             public void onClick(View v) {
                 String messageText = messageEditText.getText().toString().trim();
                 if (!messageText.isEmpty()) {
                     // Create a ChatMessage object and add it to the chatMessages list
-                    com.kursaha.common.ChatMessage message = new ChatMessage(messageText, "sender", true, LocalDateTime.now()); // You can specify the sender
+
+                    ChatMessage message = new ChatMessage(messageText, "sender", true, Calendar.getInstance().getTime()); // You can specify the sender
                     chatMessages.add(message);
                     chatAdapter.notifyDataSetChanged();
                     messageEditText.setText(""); // Clear the input field
@@ -58,7 +55,7 @@ public class ChatActivity extends KursahaActivity {
 
                         @Override
                         public void onSuccess(String result) {
-                            chatMessages.add(new ChatMessage(result, "Customer Success Representative", false, LocalDateTime.now()));
+                            chatMessages.add(new ChatMessage(result, "Customer Success Representative", false, Calendar.getInstance().getTime()));
                             chatAdapter.notifyDataSetChanged();
 
                             Log.d(TAG, "Result of the message: " + result);

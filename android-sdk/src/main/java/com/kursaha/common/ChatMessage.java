@@ -1,14 +1,14 @@
 package com.kursaha.common;
 
-import java.time.LocalDateTime;
+import java.util.Date;
 
 public class ChatMessage {
     private final String message;
     private final String sender;
     private final boolean isSender;
-    private final LocalDateTime dateTime;
+    private final Date dateTime;
 
-    public ChatMessage(String message, String sender, boolean isSender, LocalDateTime dateTime) {
+    public ChatMessage(String message, String sender, boolean isSender, Date dateTime) {
         this.message = message;
         this.sender = sender;
         this.isSender = isSender;
@@ -27,7 +27,7 @@ public class ChatMessage {
         return isSender;
     }
 
-    public LocalDateTime getDateTime() {
+    public Date getDateTime() {
         return dateTime;
     }
 }
