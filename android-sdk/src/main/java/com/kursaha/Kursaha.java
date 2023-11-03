@@ -6,13 +6,17 @@ import android.provider.Settings;
 import android.util.Log;
 
 import com.kursaha.common.Callback;
+import com.kursaha.common.ChatMessage;
 import com.kursaha.engagedatadrive.dto.CustomerData;
+import com.kursaha.smartassist.dto.ChatAutomationRequestDto;
+
+import java.util.ArrayList;
+import java.util.List;
 import java.util.UUID;
 
 public class Kursaha {
     private static final String TAG = "Kursaha";
 
-    private final String apiKey;
     private final UUID sessionId;
     private final String deviceId;
 
@@ -20,7 +24,6 @@ public class Kursaha {
 
 
     public Kursaha(String apiKey, UUID sessionId, String deviceId) {
-        this.apiKey = apiKey;
         this.sessionId = sessionId;
         this.deviceId = deviceId;
         this.kursahaClient = new KursahaClient(apiKey);
@@ -78,6 +81,7 @@ public class Kursaha {
         }
         CustomerData customerData = new CustomerData();
         customerData.setEmail(emailId);
+
         kursaha.kursahaClient.edd.sendCustomerData(customerId, customerData, new Callback() {
             @Override
             public void onSuccess() {
@@ -90,4 +94,26 @@ public class Kursaha {
             }
         });
     }
+
+    public static void chatResponseAsync(
+            UUID chatIdentifier,
+            String message,
+            List<ChatMessage> previousChatMessages,
+            Callback<String> callback
+    ) {
+        if (kursaha == null) {
+            Log.e(TAG, "Kursaha is not initialised");
+            throw new RuntimeException("Please call Kursaha.initialize first");
+        }
+        List<ChatAutomationRequestDto.QAndA> qAndAList = new ArrayList<>();
+        for(ChatMessage chatMessage : previousChatMessages) {
+            ChatAutomationRequestDto.QAndA qAndA = new ChatAutomationRequestDto.QAndA();
+            qAndA.setRequest(chatMessage.getSender());
+            qAndA.setResponse(chatMessage.getMessage());
+            qAndAList.add(qAndA);
+        }
+
+        kursaha.kursahaClient.sa.getResponse(chatIdentifier, message, qAndAList, callback);
+    }
+
 }

@@ -1,0 +1,9 @@
+<!-- res/drawable/message_bubble.xml -->
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+    <item>
+        <shape android:shape="rectangle">
+            <corners android:radius="16dp" /> <!-- Adjust the radius to control the roundness -->
+            <solid android:color="#CBE0F6" /> <!-- Background color of the bubble -->
+        </shape>
+    </item>
+</layer-list>

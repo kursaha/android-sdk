@@ -17,8 +17,9 @@ public class FirstFragment extends Fragment {
 
     @Override
     public View onCreateView(
-            LayoutInflater inflater, ViewGroup container,
-            Bundle savedInstanceState
+        LayoutInflater inflater,
+        ViewGroup container,
+        Bundle savedInstanceState
     ) {
 
         binding = FragmentFirstBinding.inflate(inflater, container, false);

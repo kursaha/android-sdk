@@ -7,7 +7,8 @@ public class MyApplication extends Application {
     public void onCreate() {
         super.onCreate();
         // Initialize the Kursaha SDK
-        Kursaha.initialize(this, "YOUR_API_KEY");
+        // Please do not use this in Production
+        Kursaha.initialize(this, "<API-KEY>");
         Kursaha.sendCustomerDetails("1234", "sample@kursaha.com");
     }
 }
