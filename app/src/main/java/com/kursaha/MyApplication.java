@@ -12,7 +12,7 @@ public class MyApplication extends Application {
         Kursaha.initialize(this, "<API-KEY>");
 
         CustomerData customerData = new CustomerData();
-        customerData.setEmail("sample@kursaha.com");
-        Kursaha.sendCustomerDetails("1234", customerData);
+        customerData.setEmail("<customer-email>");
+        Kursaha.sendCustomerDetails("<customer-id", customerData);
     }
 }

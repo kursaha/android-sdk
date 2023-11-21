@@ -37,8 +37,8 @@ public class MainActivity extends KursahaActivity {
                 startActivity(intent);
 
                 Kursaha.trackEvent(
-                        "customer_support_chat_start",
-                        "1234",
+                        "<event-type>",
+                        "<customer-id>",
                         new EventData()
                 );
             }

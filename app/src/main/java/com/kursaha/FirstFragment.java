@@ -37,7 +37,7 @@ public class FirstFragment extends Fragment {
                 NavHostFragment.findNavController(FirstFragment.this)
                         .navigate(R.id.action_FirstFragment_to_SecondFragment);
 
-                Kursaha.trackEvent("click", "1234", new EventData());
+                Kursaha.trackEvent("<event-type>", "<customer-id>", new EventData());
             }
         });
     }
