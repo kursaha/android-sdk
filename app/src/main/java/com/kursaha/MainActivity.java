@@ -2,20 +2,13 @@ package com.kursaha;
 
 import android.content.Intent;
 import android.os.Bundle;
-
-import com.google.android.material.snackbar.Snackbar;
-
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.view.View;
-
-import androidx.core.view.WindowCompat;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
-
 import com.kursaha.databinding.ActivityMainBinding;
+import com.kursaha.engagedatadrive.dto.EventData;
 import com.kursaha.sdk.KursahaActivity;
 
 public class MainActivity extends KursahaActivity {
@@ -43,7 +36,11 @@ public class MainActivity extends KursahaActivity {
                 Intent intent = new Intent(MainActivity.this, ChatActivity.class);
                 startActivity(intent);
 
-                Kursaha.trackEvent("customer_support_chat_start");
+                Kursaha.trackEvent(
+                        "customer_support_chat_start",
+                        "1234",
+                        new EventData()
+                );
             }
         });
     }

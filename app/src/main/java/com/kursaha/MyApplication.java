@@ -1,6 +1,7 @@
 package com.kursaha;
 
 import android.app.Application;
+import com.kursaha.engagedatadrive.dto.CustomerData;
 
 public class MyApplication extends Application {
     @Override
@@ -9,6 +10,9 @@ public class MyApplication extends Application {
         // Initialize the Kursaha SDK
         // Please do not use this in Production
         Kursaha.initialize(this, "<API-KEY>");
-        Kursaha.sendCustomerDetails("1234", "sample@kursaha.com");
+
+        CustomerData customerData = new CustomerData();
+        customerData.setEmail("sample@kursaha.com");
+        Kursaha.sendCustomerDetails("1234", customerData);
     }
 }
