@@ -13,6 +13,6 @@ public class MyApplication extends Application {
 
         CustomerData customerData = new CustomerData();
         customerData.setEmail("<customer-email>");
-        Kursaha.sendCustomerDetails("<customer-id", customerData);
+        Kursaha.sendCustomerDetails("<customer-id>", customerData);
     }
 }
