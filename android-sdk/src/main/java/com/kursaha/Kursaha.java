@@ -8,8 +8,8 @@ import android.util.Log;
 import com.kursaha.common.Callback;
 import com.kursaha.common.ChatMessage;
 import com.kursaha.engagedatadrive.dto.CustomerData;
+import com.kursaha.engagedatadrive.dto.EventData;
 import com.kursaha.smartassist.dto.ChatAutomationRequestDto;
-
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
@@ -67,20 +67,22 @@ public class Kursaha {
         initialize(applicationContext, apiKey);
     }
 
-    public static void trackEvent(String eventType) {
+    public static void trackEvent(String eventType, String customerId, EventData eventData) {
         if (kursaha == null) {
             Log.d(TAG, "Kursaha is not initialised");
         }
+
+        eventData.setSessionId(getInstance().sessionId.toString());
+        eventData.setDeviceId(getInstance().deviceId);
         // send event to server
+        kursaha.kursahaClient.edd.trace(customerId, eventType, eventData);
     }
 
-    public static void sendCustomerDetails(String customerId, String emailId) {
+    public static void sendCustomerDetails(String customerId, CustomerData customerData) {
         if (kursaha == null) {
             Log.e(TAG, "Kursaha is not initialised");
             throw new RuntimeException("Please call Kursaha.initialize first");
         }
-        CustomerData customerData = new CustomerData();
-        customerData.setEmail(emailId);
 
         kursaha.kursahaClient.edd.sendCustomerData(customerId, customerData, new Callback() {
             @Override
